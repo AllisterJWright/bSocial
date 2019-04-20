@@ -14,11 +14,5 @@
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix">
-			<value>/Next</value>
-		</property>
-		<property name="suffix">
-			<value>.html</value>
-		</property>
 	</bean>
 </beans>
