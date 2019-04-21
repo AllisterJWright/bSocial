@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConnectService } from '../connect.service';
 import { Posting } from '../Posting';
 import { User } from '../User';
+import { DataSharingService } from '../data-sharing.service';
 
 @Component({
   selector: 'app-posts',
@@ -17,14 +18,14 @@ export class PostsComponent implements OnInit {
 
 
 
-  constructor(private conn : ConnectService) { }
+  constructor(private conn : ConnectService, private saveUser: DataSharingService) { }
 
   ngOnInit() {
-    
+    this.saveUser.SU1.subscribe(user => this.user = user);
   }
 
   UPost(Poatz: any){
-    this.NewPost = new Posting("temp", Poatz.value.Title, this.pic, Poatz.value.Description);
+    this.NewPost = new Posting(this.user.username, Poatz.value.Title, this.pic, Poatz.value.Description);
     console.log(Poatz);
     console.log(this.NewPost);
     /*

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { DataSharingService } from '../data-sharing.service';
 import { User } from '../User';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
-import { } from '../data-sharing.service'
+
 
 @Component({
   selector: 'app-login',
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   Log( ULog : any){
     console.log(ULog);
     this.saveUser.ToggleLogged(true);
-    this.SetUser(new User('Diddy Kong', 'Banana@yahoo.com', 'SecretJungleKing', 'Banana', ''));
+    this.SetUser(new User('Diddy Kong', 'Banana@yahoo.com', 'SecretJungleKing', 'Banana', 'http://www.superluigibros.com/images/media/artwork/ds/hoops3on3/characters/large/Diddy_Kong.jpg'));
     console.log(this.SavedUser);
     this.router.navigate(['/home']);
     

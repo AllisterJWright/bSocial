@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   posting : Posting[] = Storage;
   postin : any;
   SearchUser : User[];
-  Temp : User[];
+  Result : User[];
   
   
 
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
       }
     )
 
-    this.Temp = All_U;
+    this.Result = All_U;
   }
   
   // Function for going to another users Profile

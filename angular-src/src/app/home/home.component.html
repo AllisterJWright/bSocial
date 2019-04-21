@@ -35,11 +35,15 @@
         </div>
       </div>
       -->
-       <form #SearchForm="ngForm" (ngSubmit)="search(SearchForm.value.SearchV)" style="text-align: right">
+      <div ng-app="myModule">
+      <div ng-controller="myController">
+
+       <!--<form #SearchForm="ngForm" (ngSubmit)="search(SearchForm.value.SearchV)" style="text-align: right">
           <input type="Text" placeholder="Search User" name="SearchV" ng-model="searchText"/>
           <button>Search</button>
         </form>
-        <!--
+      -->
+      <input type="Text" placeholder="Search User" name="SearchV" ng-model="searchText"/>
         <br><br>
         <table>
           <thead>
@@ -48,18 +52,21 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="user in Temp | filter:searchText" >
-            <td>{{user.username}}</td>
+            <tr ng-repeat="R in Result | filter:searchText" >
+            <td>{{R.username}}</td>
             </tr>
           </tbody>
         </table>
       <br><br>
-        -->
+    </div>
+    </div>
+        
       <ul>
-        <div *ngFor="let U of Temp">
-        <li (click)="GoToProfile2(U)">{{U.username}}</li>
+        <div *ngFor="let R of Result">
+        <li (click)="GoToProfile2(R)">{{R.username}}</li>
       </div>
       </ul>
+      
       
     
     </div>

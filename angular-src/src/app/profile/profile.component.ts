@@ -3,6 +3,7 @@ import { ConnectService } from '../connect.service';
 import { All_U,Storage } from '../Temp';
 import { User } from '../User';
 import { Posting } from '../Posting';
+import { DataSharingService } from '../data-sharing.service';
 
 
 @Component({
@@ -12,18 +13,18 @@ import { Posting } from '../Posting';
 })
 export class ProfileComponent implements OnInit {
 
-  user : User = All_U[0];
+  user : User;
   posting : Posting[] = Storage;
   public prof : boolean;
   Button : string = "Update";
-  pic: string = this.user.displayImg;
+  pic: string;//= this.user.displayImg;
 
 
   IUrl : string = '../../assets/gen-Ava.jpg';
   fileToUpload : File = null;
 
 
-  constructor(private conn : ConnectService) { }
+  constructor(private conn : ConnectService, private saveUser : DataSharingService) { }
 
   ngOnInit() {
     /*
@@ -37,6 +38,8 @@ export class ProfileComponent implements OnInit {
     )
 
     */
+   this.saveUser.SU1.subscribe(user => this.user = user)
+   this.pic = this.user.displayImg;
   }
 
   toggle(){
