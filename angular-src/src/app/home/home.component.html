@@ -40,16 +40,24 @@
           <button>Search</button>
         </form>
         <!--
-      <br/><br/>
-        <ul>
-         <div ng-repeat="U in Temp | filter:searchText" >
-        <li> {{U.username}}</li>
-      </div>
-      </ul>
-      -->
+        <br><br>
+        <table>
+          <thead>
+            <tr>
+              <th>Username</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="user in Temp | filter:searchText" >
+            <td>{{user.username}}</td>
+            </tr>
+          </tbody>
+        </table>
+      <br><br>
+        -->
       <ul>
-          <div *ngFor="let U of Temp">
-        <li (click)="SayHello(U.username)">{{U.username}}</li>
+        <div *ngFor="let U of Temp">
+        <li (click)="GoToProfile2(U)">{{U.username}}</li>
       </div>
       </ul>
       

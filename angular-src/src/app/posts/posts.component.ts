@@ -24,7 +24,7 @@ export class PostsComponent implements OnInit {
   }
 
   UPost(Poatz: any){
-    this.NewPost = new Posting("temp", Poatz.value.Title, Poatz.value.FileStream, Poatz.value.Description);
+    this.NewPost = new Posting("temp", Poatz.value.Title, this.pic, Poatz.value.Description);
     console.log(Poatz);
     console.log(this.NewPost);
     /*

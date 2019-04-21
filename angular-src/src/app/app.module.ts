@@ -17,6 +17,7 @@ import { ForgotComponent } from './forgot/forgot.component';
 import { HttpClientModule } from '@angular/common/http'
 import { ConnectService } from './connect.service';
 import { Profile2Component } from './profile2/profile2.component';
+import { DataSharingService } from './data-sharing.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { Profile2Component } from './profile2/profile2.component';
     MatCardModule,
     HttpClientModule
   ],
-  providers: [ ConnectService ],
+  providers: [ ConnectService,DataSharingService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

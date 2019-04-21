@@ -3,6 +3,8 @@ import { ConnectService } from '../connect.service';
 import { Router } from '@angular/router';
 import { DataSharingService } from '../data-sharing.service';
 import { User } from '../User';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
+import { } from '../data-sharing.service'
 
 @Component({
   selector: 'app-login',
@@ -11,28 +13,37 @@ import { User } from '../User';
 })
 export class LoginComponent implements OnInit {
 
-SavedUser: User;
+  SavedUser: User;
+  Logged : Boolean;
 
   constructor(private conn : ConnectService, private router: Router, private saveUser: DataSharingService) { }
 
   ngOnInit() {
     
+    this.saveUser.LN.subscribe(Logged => this.Logged = Logged);
+    this.saveUser.SU1.subscribe(SavedUser => this.SavedUser = SavedUser);
+    console.log(this.SavedUser);
   }
 
   SetUser(user: User){
     this.saveUser.changeLogInUser(user);
+    
   }
 
   Log( ULog : any){
+    console.log(ULog);
+    this.saveUser.ToggleLogged(true);
+    this.SetUser(new User('Diddy Kong', 'Banana@yahoo.com', 'SecretJungleKing', 'Banana', ''));
+    console.log(this.SavedUser);
+    this.router.navigate(['/home']);
     
-  }
     /*
     this.conn.loginUser(ULog.value).subscribe(
       data => {
-          console.log(data);
+        console.log(data);
         alert("Were In");
+        SetUser(data);
         this.router.navigate(['/home']);
-        return data;
       },
       error => {
         console.log("Error");
@@ -40,7 +51,8 @@ SavedUser: User;
       }
     );
     console.log(ULog.value);
+    */
   }
-  */
+  
 
 }

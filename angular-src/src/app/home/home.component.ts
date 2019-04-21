@@ -3,6 +3,8 @@ import { Posting } from '../Posting';
 import { Storage, All_U } from '../Temp';
 import { ConnectService } from '../connect.service';
 import { User } from '../User';
+import { Router } from '@angular/router';
+import { DataSharingService } from '../data-sharing.service';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +22,7 @@ export class HomeComponent implements OnInit {
 
 
 
-  constructor(private conn : ConnectService) { }
+  constructor(private conn : ConnectService, private route : Router, private saveUser : DataSharingService) { }
 
   ngOnInit() {
     this.postin = this.conn.showPost('').subscribe(
@@ -38,14 +40,22 @@ export class HomeComponent implements OnInit {
         this.SearchUser = data;
       },
       error => {
-        alert("How could you screw this up. You simpleton!")
+        alert("How could you screw this up. You simpleton!");
       }
     )
 
     this.Temp = All_U;
   }
-  SayHello(Prof:any){
+  
+  // Function for going to another users Profile
+  GoToProfile2(Prof:any){
     console.log(Prof);
+    this.saveUser.searchOtherUser(Prof);
+    this.route.navigate(['/profile2']);
+
+    /*
+    * this.conn.showPost(Prof.value.whatever)
+    */
   }
   /*
   search(Zeta : any){

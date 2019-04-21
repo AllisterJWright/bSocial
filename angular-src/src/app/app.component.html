@@ -13,21 +13,21 @@
               <a class="nav-link"  routerLink="/home" routerLinkActive="active" style="color:azure">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLink="/profile" routerLinkActive="active" style="color:azure">Profile</a>
+                <a class="nav-link" routerLink="/profile" *ngIf='Logged' routerLinkActive="active" style="color:azure">Profile</a>
             </li>
-            <!--
+            
             <li class="nav-item">
-                <a class="nav-link" routerLink="/forgot" routerLinkActive="active" style="color:azure">Forgot</a>
+                <a class="nav-link" routerLink="/forgot" *ngIf='!Logged' routerLinkActive="active" style="color:azure">Forgot</a>
             </li>
-            -->
+          
             <li class="nav-item">
-                <a class="nav-link" routerLink="/posts" routerLinkActive="active" style="color:azure">Make Post</a>
+                <a class="nav-link" routerLink="/posts" *ngIf='Logged' routerLinkActive="active" style="color:azure">Make Post</a>
             </li>
           </ul>
           <ul class="navbar-nav">
-              <!--<a class="nav-link"   routerLink="/login" routerLinkActive="active" style="color:azure">Login</a>
-              <a class="nav-link"   routerLink="/register" routerLinkActive="active" style="color:azure">Register</a>-->
-              <a class="nav-link"  style="cursor:pointer" routerLink="/login" style="color:azure">Logout</a>     
+              <a class="nav-link"   routerLink="/login" *ngIf='!Logged' routerLinkActive="active" style="color:azure">Login</a>
+              <a class="nav-link"   routerLink="/register" *ngIf='!Logged' routerLinkActive="active" style="color:azure">Register</a>
+              <a class="nav-link"  style="cursor:pointer" *ngIf='Logged' routerLink="/login" style="color:azure" (click)= "Logout()">Logout</a>     
           </ul>
         </div>
       </nav>    

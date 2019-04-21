@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from './User';
-import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -29,27 +27,24 @@ export class ConnectService {
     return this._http.get(this.URL + '/getemployees', user)
   }
 
-  showUserPost(){
-    '/autoAddUserPosts.rev'
-  }
-
-  //TBI
+  //Send Post to be inserted
   insertPost(Post){
     return this._http.post<any>(this.URL + '/submitPost', Post)
   }
 
-  //TBI
+  //Sending changes for updating profile
   updateProf(){
 
   }
 
-  //TBI
+  //Send and email back for changing password
   forgotPass(Email : String){
     console.log(Email);
     return this._http.post<any>(this.URL + '', Email);
 
   }
 
+  //Collecting all users for a search
   callingAllUsers(user : string){
     return this._http.post<any>(this.URL + '',null);
   }
