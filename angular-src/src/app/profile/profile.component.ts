@@ -3,7 +3,6 @@ import { ConnectService } from '../connect.service';
 import { All_U,Storage } from '../Temp';
 import { User } from '../User';
 import { Posting } from '../Posting';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 
 
 @Component({

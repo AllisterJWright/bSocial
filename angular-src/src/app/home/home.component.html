@@ -26,6 +26,34 @@
           <br>
       </div>
     </div>
-    <div class="column right"></div>
+    <div class="column right">
+      <!--
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search Username" aria-label="Recipient's username" aria-describedby="button-addon2" style="width:100px">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+        </div>
+      </div>
+      -->
+       <form #SearchForm="ngForm" (ngSubmit)="search(SearchForm.value.SearchV)" style="text-align: right">
+          <input type="Text" placeholder="Search User" name="SearchV" ngModel/>
+          <button>Search</button>
+        </form>
+        <!--
+      <br/><br/>
+        <ul>
+         <div ng-repeat="U in Temp | filter:searchText">
+        <li> {{U.username}}</li>
+      </div>
+      </ul>
+      
+      <ul ng-repeat="U in Temp | filter:searchText">
+          <div *ngFor="let U of Temp">
+        <li>{{U.username}}</li>
+      </div>
+      </ul>
+      -->
+    
+    </div>
     </div>
     

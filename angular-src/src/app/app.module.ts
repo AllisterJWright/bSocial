@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { ForgotComponent } from './forgot/forgot.component';
 import { HttpClientModule } from '@angular/common/http'
 import { ConnectService } from './connect.service';
+import { Profile2Component } from './profile2/profile2.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ConnectService } from './connect.service';
     PostsComponent,
     ProfileComponent,
     HomeComponent,
-    ForgotComponent
+    ForgotComponent,
+    Profile2Component
   ],
   imports: [
     BrowserModule,

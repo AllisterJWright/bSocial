@@ -50,5 +50,9 @@ export class ConnectService {
 
   }
 
+  callingAllUsers(user : string){
+    return this._http.post<any>(this.URL + '',null);
+  }
+
   constructor(private _http: HttpClient) { }
 }

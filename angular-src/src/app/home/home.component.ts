@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Posting } from '../Posting';
-import { Storage } from '../Temp';
+import { Storage, All_U } from '../Temp';
 import { ConnectService } from '../connect.service';
+import { User } from '../User';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,11 @@ export class HomeComponent implements OnInit {
 
   posting : Posting[] = Storage;
   postin : any;
+  SearchUser : User[];
+  Temp : User[];
+  
+  
+
 
 
   constructor(private conn : ConnectService) { }
@@ -26,6 +32,21 @@ export class HomeComponent implements OnInit {
         alert("No Post");
       }
     )
-  }
 
+    this.conn.callingAllUsers(null).subscribe(
+      data => {
+        this.SearchUser = data;
+      },
+      error => {
+        alert("How could you screw this up. You simpleton!")
+      }
+    )
+
+    this.Temp = All_U;
+  }
+  /*
+  search(Zeta : any){
+    console.log(Zeta);
+  }
+  */
 }

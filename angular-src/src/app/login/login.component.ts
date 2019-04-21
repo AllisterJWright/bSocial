@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConnectService } from '../connect.service';
 import { Router } from '@angular/router';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
+import { DataSharingService } from '../data-sharing.service';
+import { User } from '../User';
 
 @Component({
   selector: 'app-login',
@@ -10,12 +11,16 @@ import { routerNgProbeToken } from '@angular/router/src/router_module';
 })
 export class LoginComponent implements OnInit {
 
+SavedUser: User;
 
-
-  constructor(private conn : ConnectService, private router: Router) { }
+  constructor(private conn : ConnectService, private router: Router, private saveUser: DataSharingService) { }
 
   ngOnInit() {
+    
+  }
 
+  SetUser(user: User){
+    this.saveUser.changeLogInUser(user);
   }
 
   Log( ULog : any){
