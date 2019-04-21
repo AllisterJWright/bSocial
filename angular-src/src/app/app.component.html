@@ -1,0 +1,38 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<nav class="navbar navbar-light" style="background-color: #655A58;">
+        <!--<a class="navbar-brand" href="#">BSocial</a>-->
+        <img class="aligncenter" href="#" src="../assets/navlogo_resize2.png">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link"  routerLink="/home" routerLinkActive="active" style="color:azure">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/profile" routerLinkActive="active" style="color:azure">Profile</a>
+            </li>
+            <!--
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/forgot" routerLinkActive="active" style="color:azure">Forgot</a>
+            </li>
+            -->
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/posts" routerLinkActive="active" style="color:azure">Make Post</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+              <!--<a class="nav-link"   routerLink="/login" routerLinkActive="active" style="color:azure">Login</a>
+              <a class="nav-link"   routerLink="/register" routerLinkActive="active" style="color:azure">Register</a>-->
+              <a class="nav-link"  style="cursor:pointer" routerLink="/login" style="color:azure">Logout</a>     
+          </ul>
+        </div>
+      </nav>    
+      <div class="container">
+        <router-outlet></router-outlet>            
+      </div><div class="container">
+<router-outlet></router-outlet>
+</div>

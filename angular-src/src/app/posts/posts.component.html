@@ -1,0 +1,22 @@
+<h1>Make a new post</h1>
+
+
+
+<form #Postz="ngForm" (ngSubmit)="UPost(Postz)">
+  <div class="form-group-row">
+    <label for="Title">Title</label>
+    <input type="text" placeholder="Title" name="Title" ngModel/>
+  </div>
+  <br>
+  <div class="form-group-row">
+    <label for="Image">Image</label>
+    <img [src]='IUrl'>
+    <input type="file" #Image accept='image/*,video/*' (change)="handleFileInput($event.target.files)" name="FileStream" ngModel/>
+  </div>
+  <br>
+  <div class="form-group-row">
+    <label for="Des">Description</label>
+    <input type="text" placeholder="Description" name="Description" ngModel/>
+  </div>  
+  <button>submit</button>
+</form>

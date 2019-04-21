@@ -1,0 +1,22 @@
+img{
+    width: 90%;
+    height: 400px;
+}
+.column {
+    float: left;
+    padding: 10px;
+  }
+  
+.left, .right {
+    width: 31%;
+  }
+  
+.middle {
+    width: 38%;
+  }
+  
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }

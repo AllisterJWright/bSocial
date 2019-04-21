@@ -1,0 +1,6 @@
+<h2>Enter your email address</h2>
+<form #forgotPass="ngForm" (ngSubmit)="ForgotPass(forgotPass)">
+  <input type="email" id="email" name="Email" ngModel>
+  <button type="submit">Submit</button>
+</form>
+<a routerLink="/login"><button>Back</button></a>

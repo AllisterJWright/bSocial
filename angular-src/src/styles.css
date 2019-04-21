@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+body{
+    background-color: #D2CECF;
+    color: white;
+}
+#Alpha {
+    text-align: center;
+    max-width: 500px;
+}
+#Alpha img{
+        width: 90%;
+        height: 400px;
+}

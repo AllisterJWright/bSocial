@@ -1,0 +1,9 @@
+a{
+    color: azure;
+}
+.aligncenter {
+    position: relative;
+    left: 44%;
+    margin-left: -50px !important;  /* 50% of your logo width */
+    display: inline;
+}
