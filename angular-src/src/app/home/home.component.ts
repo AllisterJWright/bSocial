@@ -44,6 +44,9 @@ export class HomeComponent implements OnInit {
 
     this.Temp = All_U;
   }
+  SayHello(Prof:any){
+    console.log(Prof);
+  }
   /*
   search(Zeta : any){
     console.log(Zeta);

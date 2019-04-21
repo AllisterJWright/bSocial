@@ -36,23 +36,23 @@
       </div>
       -->
        <form #SearchForm="ngForm" (ngSubmit)="search(SearchForm.value.SearchV)" style="text-align: right">
-          <input type="Text" placeholder="Search User" name="SearchV" ngModel/>
+          <input type="Text" placeholder="Search User" name="SearchV" ng-model="searchText"/>
           <button>Search</button>
         </form>
         <!--
       <br/><br/>
         <ul>
-         <div ng-repeat="U in Temp | filter:searchText">
+         <div ng-repeat="U in Temp | filter:searchText" >
         <li> {{U.username}}</li>
       </div>
       </ul>
-      
-      <ul ng-repeat="U in Temp | filter:searchText">
+      -->
+      <ul>
           <div *ngFor="let U of Temp">
-        <li>{{U.username}}</li>
+        <li (click)="SayHello(U.username)">{{U.username}}</li>
       </div>
       </ul>
-      -->
+      
     
     </div>
     </div>
