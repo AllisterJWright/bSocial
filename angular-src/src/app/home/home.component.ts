@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   postin : any;
   SearchUser : User[];
   Result : User[];
+  searchText: string;
   
   
 

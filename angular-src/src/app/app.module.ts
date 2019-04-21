@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { ConnectService } from './connect.service';
 import { Profile2Component } from './profile2/profile2.component';
 import { DataSharingService } from './data-sharing.service';
+import { SearchFilterPipe } from './home/Search-Filter.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { DataSharingService } from './data-sharing.service';
     ProfileComponent,
     HomeComponent,
     ForgotComponent,
-    Profile2Component
+    Profile2Component,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,
