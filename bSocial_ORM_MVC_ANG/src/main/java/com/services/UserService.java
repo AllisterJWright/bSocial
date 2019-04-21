@@ -1,9 +1,8 @@
 package com.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import com.daoRepository.UserDaoRepo;
@@ -17,6 +16,16 @@ public class UserService {
 
 	public User findPerson (String username) {
 		return UDR.selectUser(username);
+	}
+	
+	public List<User> selectAllUsers()
+	{
+		return UDR.selectAllUsers();
+	}
+	
+	public User selectUserByEmail(String email)
+	{
+		return UDR.selectUserByEmail(email);
 	}
 	
 	public int register (User user) {
