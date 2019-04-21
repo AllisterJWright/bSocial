@@ -20,10 +20,12 @@ public class UserController
 	
 	// @CrossOrigin is used to handle the request from a different origin
 	@CrossOrigin(origins="http://localhost:4200")
-	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public @ResponseBody String registerUser(@RequestBody String name, String email, String username, String password)
+	@RequestMapping(value="/register.app", method=RequestMethod.POST)
+	public @ResponseBody String registerUser(@PathVariable(value = "name") String name, 
+											@PathVariable(value = "email") String email,
+											@PathVariable(value = "username") String username,
+											@PathVariable(value = "password") String password)
 	{
-//		System.out.println(jsonString);
 		String defaultProfileImage = "default-profile-image";
 		User user = new User(username, password, email, name, defaultProfileImage);
 		userService.insertUser(user);
