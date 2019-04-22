@@ -54,12 +54,29 @@ export class ProfileComponent implements OnInit {
 
   update(Profz:any){
     if(Profz.value.displayImg == ""){
-
+      this.user = new User(Profz.value.displayName, Profz.value.email, this.user.username, this.user.password,  this.user.displayImg)
+      this.conn.updateProf(this.user).subscribe(
+        data =>{
+          alert("ITS GOOD!!!!");
+          this.saveUser.changeLogInUser(this.user);
+        },
+        error =>{
+          alert("DENIED!");
+          this.saveUser.changeLogInUser(this.user);
+        }
+      )
     }else{
-      let temp :File;
-      temp = Profz.value.displayImg;
-      this.user = new User(Profz.value.name, Profz.value.email, Profz.value.username, null,  this.pic);
-      //this.conn.updateProf(user);
+      this.user = new User(Profz.value.displayName, Profz.value.email, this.user.username, this.user.password,  this.pic);
+      this.conn.updateProf(this.user).subscribe(
+        data =>{
+          alert("ITS GOOD!!!!");
+          this.saveUser.changeLogInUser(this.user);
+        },
+        error =>{
+          alert("DENIED!");
+          this.saveUser.changeLogInUser(this.user);
+        }
+      );
       console.log(this.user);
     }
   }

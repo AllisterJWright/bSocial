@@ -10,7 +10,7 @@ export const Storage : Posting[] = [
 ]
 
 export const All_U : User[] =[
-    { name: 'Seto Kaiba', email:'BlueEyes@yahoo.com',username:'CEO_Kaiba', displayImg:'http://pm1.narvii.com/6347/d5e703cfc1f9b2e935afffe2ce423a26d24341a0_hq.jpg', password:null },
-    { name: 'Yugi Moto', email:'DarkMagician@yahoo.com',username:'KingOfGames', displayImg:'http://orig10.deviantart.net/9bd4/f/2015/187/0/d/yugi_muto_by_fabry33-d907vtf.png', password:null },
-    { name: 'Joey Wheeler', email:'BlackDragon@yahoo.com',username:'KidwithHeart', displayImg:'https://i.pinimg.com/736x/4d/55/e3/4d55e3297933af5700a9b484cf39866f.jpg', password:null },
+    { displayName: 'Seto Kaiba', email:'BlueEyes@yahoo.com',username:'CEO_Kaiba', displayImg:'http://pm1.narvii.com/6347/d5e703cfc1f9b2e935afffe2ce423a26d24341a0_hq.jpg', password:null },
+    { displayName: 'Yugi Moto', email:'DarkMagician@yahoo.com',username:'KingOfGames', displayImg:'http://orig10.deviantart.net/9bd4/f/2015/187/0/d/yugi_muto_by_fabry33-d907vtf.png', password:null },
+    { displayName: 'Joey Wheeler', email:'BlackDragon@yahoo.com',username:'KidwithHeart', displayImg:'https://i.pinimg.com/736x/4d/55/e3/4d55e3297933af5700a9b484cf39866f.jpg', password:null },
 ]

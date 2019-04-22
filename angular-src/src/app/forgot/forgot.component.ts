@@ -16,7 +16,7 @@ export class ForgotComponent implements OnInit {
   }
 
   ForgotPass(FP : any){
-    this.conn.forgotPass(FP.value.Email).subscribe(
+    this.conn.forgotPass(FP.value.email).subscribe(
       data => {
         if(data == null){
           console.log("Email doesn't exist or already exist");

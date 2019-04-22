@@ -38,10 +38,11 @@ export class RegisterComponent implements OnInit {
 
     this.conn.registerUser(this.user).subscribe(
       res => {
+        alert('Success');
         this.router.navigate(['/login']);
      },
       error => {
-        alert("Username already taken");
+        alert("Failure");
       }
     );
 

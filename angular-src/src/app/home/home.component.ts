@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   constructor(private conn : ConnectService, private route : Router, private saveUser : DataSharingService) { }
 
   ngOnInit() {
+    /*
     this.postin = this.conn.showPost('').subscribe(
       data => {
         return data;
@@ -44,7 +45,7 @@ export class HomeComponent implements OnInit {
         alert("How could you screw this up. You simpleton!");
       }
     )
-
+    */
     this.Result = All_U;
   }
   

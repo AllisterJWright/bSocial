@@ -32,26 +32,26 @@ export class LoginComponent implements OnInit {
 
   Log( ULog : any){
     console.log(ULog);
-    this.saveUser.ToggleLogged(true);
-    this.SetUser(new User('Diddy Kong', 'Banana@yahoo.com', 'SecretJungleKing', 'Banana', 'http://www.superluigibros.com/images/media/artwork/ds/hoops3on3/characters/large/Diddy_Kong.jpg'));
-    console.log(this.SavedUser);
-    this.router.navigate(['/home']);
     
-    /*
+
     this.conn.loginUser(ULog.value).subscribe(
       data => {
-        console.log(data);
+        if(data == null){
+          alert("Wrong Username or Password.");
+        }else{
+        this.saveUser.ToggleLogged(true);
+        this.SetUser(data);
+        //this.SetUser(new User('Diddy Kong', 'Banana@yahoo.com', 'SecretJungleKing', 'Banana', 'http://www.superluigibros.com/images/media/artwork/ds/hoops3on3/characters/large/Diddy_Kong.jpg'));
         alert("Were In");
-        SetUser(data);
         this.router.navigate(['/home']);
+        console.log(data);
+      }
       },
       error => {
-        console.log("Error");
-        alert("Wrong Username or Password.");
+        console.log("You messed up some how, cause i promise you nothing is wrong with my code.");
       }
     );
     console.log(ULog.value);
-    */
   }
   
 

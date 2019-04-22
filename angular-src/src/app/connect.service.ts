@@ -13,7 +13,7 @@ export class ConnectService {
   // USERS -----------------------------------------------------------------
   // Register a user by sending a user object to be parsed by the middle end.
   registerUser(User){
-    return this._http.post<any>(this.URL + '/register', User)
+    return this._http.post<any>(this.URL + '/register.rev', User)
   }
 
   // To be finished
@@ -23,8 +23,8 @@ export class ConnectService {
   }
 
   //Sending changes for updating profile
-  updateProf(){
-
+  updateProf(user : any){
+    return this._http.post<any>(this.URL + '/updateProfile.rev', user)
   }
 
   //Collecting all users for a search
@@ -35,7 +35,7 @@ export class ConnectService {
   //Send and email back for changing password
   forgotPass(Email : String){
     console.log(Email);
-    return this._http.post<any>(this.URL + '', Email);
+    return this._http.post<any>(this.URL + '/forgotPassword.rev', Email);
   }
   
 
