@@ -47,7 +47,7 @@ public class PostController
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200")
-	@RequestMapping(value="/submitPost", method=RequestMethod.POST)
+	@RequestMapping(value="/getPosts", method=RequestMethod.POST)
 	public @ResponseBody List<Post> getPostFeed(@PathVariable(name = "username") String username)
 	{
 		if (username == "")

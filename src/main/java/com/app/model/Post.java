@@ -31,13 +31,13 @@ public class Post
 	@Column (name = "title", nullable = false)
 	String title;
 	
-	@Column (name = "created_at", nullable=false)
-	@CreationTimestamp
-	String timestampOrig;
-	
-	@Column (name = "last_edited")
-	@UpdateTimestamp
-	String timestampEdit;
+//	@Column (name = "created_at", nullable=false)
+//	@CreationTimestamp
+//	String timestampOrig;
+//	
+//	@Column (name = "last_edited")
+//	@UpdateTimestamp
+//	String timestampEdit;
 
 	public Post()
 	{	}
@@ -51,8 +51,8 @@ public class Post
 		this.imageURL = imageURL;
 		this.description = description;
 		this.title = title;
-		this.timestampOrig = timestampOrig;
-		this.timestampEdit = timestampEdit;
+//		this.timestampOrig = timestampOrig;
+//		this.timestampEdit = timestampEdit;
 	}
 
 	public Post(String username, String imageURL, String description, String title)
@@ -114,22 +114,23 @@ public class Post
 		this.title = title;
 	}
 
-	public String getTimestampOrig()
-	{
-		return timestampOrig;
-	}
-
-	public String getTimestampEdit()
-	{
-		return timestampEdit;
-	}
+//	public String getTimestampOrig()
+//	{
+//		return timestampOrig;
+//	}
+//
+//	public String getTimestampEdit()
+//	{
+//		return timestampEdit;
+//	}
 
 	@Override
 	public String toString()
 	{
 		return "Post [postId=" + postId + ", username=" + username + ", imageURL=" + imageURL + ", description="
-				+ description + ", title=" + title + ", timestampOrig=" + timestampOrig + ", timestampEdit="
-				+ timestampEdit + "]";
+				+ description + ", title=" + title + "]";
+//				, timestampOrig=" + timestampOrig + ", timestampEdit="
+//				+ timestampEdit + "]";
 	}
 	
 }

@@ -13,16 +13,16 @@ public class User
 	@Column (name = "username", unique = true, nullable = false)
 	private String username;
 	
-	@Column (name = "password", nullable = false)
+	@Column (name = "password")//, nullable = false)
 	private String password;
 	
-	@Column (name = "email", unique = true, nullable = false)
+	@Column (name = "email")//, unique = true, nullable = false)
 	private String email;
 	
-	@Column (name = "display_name", nullable = false)
+	@Column (name = "display_name")//, nullable = false)
 	private String displayName;
 	
-	@Column (name = "display_image_url", nullable = false)
+	@Column (name = "display_image_url")//, nullable = false)
 	private String displayImg; 		// link to s3 for profile picture
 	
 	public User() {}
@@ -43,6 +43,11 @@ public class User
 		this.username = username;
 		this.password = password;
 		this.email = email;
+	}
+	
+	public User(String username)
+	{
+		this.username = username;
 	}
 
 	public String getUsername()
