@@ -1,5 +1,7 @@
 package com.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
 import com.models.Posts;
 import com.services.PostsService;
+import com.services.S3Service;
+
 @RestController
 public class PostsController {
 	
@@ -38,9 +42,20 @@ public class PostsController {
 	{
 		System.out.println(postJson);
 		Posts newPost = (new Gson()).fromJson(postJson, Posts.class);
-		System.out.println(newPost);
-		PS.insertPost(newPost);
-		return 0;
+		byte[] imageData = newPost.getImage().getBytes();
+		try
+		{
+			String s3Url = S3Service.submitImage(new ByteArrayInputStream(imageData));
+			newPost.setImage(s3Url);
+			System.out.println(newPost);
+			PS.insertPost(newPost);
+			return 0;
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return 1;
 	}
 	
 	@CrossOrigin(origins="http://localhost:4200")
@@ -49,8 +64,19 @@ public class PostsController {
 	{
 		System.out.println(postJson);
 		Posts updatedPost = (new Gson()).fromJson(postJson, Posts.class);
-		System.out.println(updatedPost);
-		PS.updatePost(updatedPost);
-		return 0;
+		byte[] imageData = updatedPost.getImage().getBytes();
+		try
+		{
+			String s3Url = S3Service.submitImage(new ByteArrayInputStream(imageData));
+			updatedPost.setImage(s3Url);
+			System.out.println(updatedPost);
+			PS.updatePost(updatedPost);
+			return 0;
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return 1;
 	}
 }
