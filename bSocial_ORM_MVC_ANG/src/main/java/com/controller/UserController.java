@@ -1,6 +1,8 @@
 package com.controller;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.email.EmailHandler;
 import com.google.gson.Gson;
+import com.models.Posts;
 import com.models.User;
 import com.services.S3Service;
 import com.services.UserService;
@@ -74,19 +77,32 @@ public class UserController
 	@RequestMapping(value = "/updateProfile.rev", method = RequestMethod.POST)
 	public User UpdateUser(@RequestBody String jsonString)
 	{
+		System.out.println(jsonString);
 		User user = (new Gson()).fromJson(jsonString, User.class);
-		byte[] imageData = user.getDisplayImg().getBytes();
-		try
+		String imageFile = user.getDisplayImg();
+		if (imageFile.contains("http"))
 		{
-			String s3Url = S3Service.submitImage(new ByteArrayInputStream(imageData));
-			user.setDisplayImg(s3Url);
-			User updatedUser = US.update(user);
-			System.out.println(updatedUser);
-			return updatedUser;
+			US.update(user);
+			return user;
 		}
-		catch (IOException e)
+		else
 		{
-			e.printStackTrace();
+//			String imageData = newPost.getImage().split(",")[1];
+//			System.out.println(imageData);
+			try
+			{
+//			byte[] imageBytes = Base64.getDecoder().decode(imageData.getBytes("UTF-8"));
+//			String s3Url = S3Service.submitImage(new ByteArrayInputStream(imageBytes));
+				String s3Url = S3Service.submitImage(new FileInputStream(new File(imageFile)));
+				user.setDisplayImg(s3Url);
+				System.out.println(user);
+				US.update(user);
+				return user;
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
