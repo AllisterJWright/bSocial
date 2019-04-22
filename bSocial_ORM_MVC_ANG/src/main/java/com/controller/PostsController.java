@@ -1,7 +1,10 @@
 package com.controller;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,63 +22,90 @@ import com.services.PostsService;
 import com.services.S3Service;
 
 @RestController
-public class PostsController {
-	
+public class PostsController
+{
+
 	@Autowired
 	PostsService PS;
-	
+
 	@CrossOrigin("http://localhost:4200")
-	@RequestMapping(value="/getAllPosts.rev" ,  method=RequestMethod.GET)
-	public @ResponseBody List<Posts> getAllPosts (){
+	@RequestMapping(value = "/getAllPosts.rev", method = RequestMethod.GET)
+	public @ResponseBody List<Posts> getAllPosts()
+	{
 		return PS.getAllPost();
-	} 
-	
-	@CrossOrigin(origins="http://localhost:4200")
-	@RequestMapping(value="/getPostsByUser.rev" , method=RequestMethod.GET)
-	public @ResponseBody List<Posts> getPostsByUser (@RequestParam String username){
+	}
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/getPostsByUser.rev", method = RequestMethod.GET)
+	public @ResponseBody List<Posts> getPostsByUser(@RequestParam String username)
+	{
 		return PS.getUserPost(username);
 	}
-	
-	@CrossOrigin(origins="http://localhost:4200")
-	@RequestMapping(value="/submitPost.rev" , method=RequestMethod.POST)
-	public int insertPost (@RequestBody String postJson) 
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/submitPost.rev", method = RequestMethod.POST)
+	public int insertPost(@RequestBody String postJson)
 	{
 		System.out.println(postJson);
-		Posts newPost = (new Gson()).fromJson(postJson, Posts.class);
-		byte[] imageData = newPost.getImage().getBytes();
-		try
+		Posts post = (new Gson()).fromJson(postJson, Posts.class);
+		String imageFile = post.getImage();
+		if (imageFile.contains("http"))
 		{
-			String s3Url = S3Service.submitImage(new ByteArrayInputStream(imageData));
-			newPost.setImage(s3Url);
-			System.out.println(newPost);
-			PS.insertPost(newPost);
+			PS.insertPost(post);
 			return 0;
 		}
-		catch (IOException e)
+		else
 		{
-			e.printStackTrace();
+//			String imageData = newPost.getImage().split(",")[1];
+//			System.out.println(imageData);
+			try
+			{
+//			byte[] imageBytes = Base64.getDecoder().decode(imageData.getBytes("UTF-8"));
+//			String s3Url = S3Service.submitImage(new ByteArrayInputStream(imageBytes));
+				String s3Url = S3Service.submitImage(new FileInputStream(new File(imageFile)));
+				post.setImage(s3Url);
+				System.out.println(post);
+				PS.insertPost(post);
+				return 0;
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
 		}
 		return 1;
 	}
-	
-	@CrossOrigin(origins="http://localhost:4200")
-	@RequestMapping(value="/updatePost.rev" , method=RequestMethod.POST)
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/updatePost.rev", method = RequestMethod.POST)
 	public int updatePost(@RequestBody String postJson)
 	{
 		System.out.println(postJson);
-		Posts updatedPost = (new Gson()).fromJson(postJson, Posts.class);
-		byte[] imageData = updatedPost.getImage().getBytes();
-		try
+		Posts post = (new Gson()).fromJson(postJson, Posts.class);
+		String imageFile = post.getImage();
+		if (imageFile.contains("http"))
 		{
-			String s3Url = S3Service.submitImage(new ByteArrayInputStream(imageData));
-			updatedPost.setImage(s3Url);
-			System.out.println(updatedPost);
-			PS.updatePost(updatedPost);
+			PS.updatePost(post);
 			return 0;
 		}
-		catch (IOException e)
+		else
 		{
-			e.printStackTrace();
+//			String imageData = newPost.getImage().split(",")[1];
+//			System.out.println(imageData);
+			try
+			{
+//			byte[] imageBytes = Base64.getDecoder().decode(imageData.getBytes("UTF-8"));
+//			String s3Url = S3Service.submitImage(new ByteArrayInputStream(imageBytes));
+				String s3Url = S3Service.submitImage(new FileInputStream(new File(imageFile)));
+				post.setImage(s3Url);
+				System.out.println(post);
+				PS.insertPost(post);
+				return 0;
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
 		}
 		return 1;
 	}
