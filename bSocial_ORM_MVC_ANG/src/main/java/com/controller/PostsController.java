@@ -56,13 +56,13 @@ public class PostsController
 		}
 		else
 		{
-//			String imageData = newPost.getImage().split(",")[1];
-//			System.out.println(imageData);
+			String imageData = post.getImage().split(",")[1];
+			System.out.println(imageData);
 			try
 			{
-//			byte[] imageBytes = Base64.getDecoder().decode(imageData.getBytes("UTF-8"));
-//			String s3Url = S3Service.submitImage(new ByteArrayInputStream(imageBytes));
-				String s3Url = S3Service.submitImage(new FileInputStream(new File(imageFile)));
+				byte[] imageBytes = Base64.getDecoder().decode(imageData.getBytes("UTF-8"));
+				String s3Url = S3Service.submitImage(new ByteArrayInputStream(imageBytes));
+//				String s3Url = S3Service.submitImage(imageFile);
 				post.setImage(s3Url);
 				System.out.println(post);
 				PS.insertPost(post);
@@ -90,13 +90,13 @@ public class PostsController
 		}
 		else
 		{
-//			String imageData = newPost.getImage().split(",")[1];
-//			System.out.println(imageData);
+			String imageData = post.getImage().split(",")[1];
+			System.out.println(imageData);
 			try
 			{
-//			byte[] imageBytes = Base64.getDecoder().decode(imageData.getBytes("UTF-8"));
-//			String s3Url = S3Service.submitImage(new ByteArrayInputStream(imageBytes));
-				String s3Url = S3Service.submitImage(new FileInputStream(new File(imageFile)));
+				byte[] imageBytes = Base64.getDecoder().decode(imageData.getBytes("UTF-8"));
+				String s3Url = S3Service.submitImage(new ByteArrayInputStream(imageBytes));
+//				String s3Url = S3Service.submitImage(imageFile);
 				post.setImage(s3Url);
 				System.out.println(post);
 				PS.insertPost(post);
