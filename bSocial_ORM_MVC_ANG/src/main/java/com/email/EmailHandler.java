@@ -17,8 +17,8 @@ import com.amazonaws.services.simpleemail.model.SendEmailRequest;
 public class EmailHandler
 {
 
-	static AWSCredentials credentials = new BasicAWSCredentials("AKIAR2XG2A3676MAYE63", // Access Key
-			"eZbhtllqLDg2m6jfpvZEeW8lKdEsb+nCeC12IBqf"); // Secret Access Key
+	static AWSCredentials credentials = new BasicAWSCredentials("AKIAR2XG2A363RA436BO", // Access Key ID
+			"dzwjiFoVQIN2FY5xm9jluljmSREOA07e8gqebAk6"); // Secret Access Key
 
 	// Replace sender@example.com with your "From" address.
 	// This address must be verified with Amazon SES.
