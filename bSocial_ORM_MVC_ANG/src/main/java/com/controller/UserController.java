@@ -1,14 +1,12 @@
 package com.controller;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.email.EmailHandler;
 import com.google.gson.Gson;
-import com.models.Posts;
 import com.models.User;
 import com.services.S3Service;
 import com.services.UserService;
@@ -87,13 +84,13 @@ public class UserController
 		}
 		else
 		{
-//			String imageData = newPost.getImage().split(",")[1];
-//			System.out.println(imageData);
+			String imageData = user.getDisplayImg().split(",")[1];
+			System.out.println(imageData);
 			try
 			{
-//			byte[] imageBytes = Base64.getDecoder().decode(imageData.getBytes("UTF-8"));
-//			String s3Url = S3Service.submitImage(new ByteArrayInputStream(imageBytes));
-				String s3Url = S3Service.submitImage(new FileInputStream(new File(imageFile)));
+				byte[] imageBytes = Base64.getDecoder().decode(imageData.getBytes("UTF-8"));
+				String s3Url = S3Service.submitImage(new ByteArrayInputStream(imageBytes));
+//				String s3Url = S3Service.submitImage(imageFile);
 				user.setDisplayImg(s3Url);
 				System.out.println(user);
 				US.update(user);

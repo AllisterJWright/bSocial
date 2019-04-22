@@ -1,6 +1,7 @@
 package com.services;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -13,12 +14,21 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 
 public class S3Service {
+	
+	static AWSCredentials credentials;
+	static
+	{
+		credentials = new BasicAWSCredentials(
+				"AKIAR2XG2A36RCJG7VME", 						// Access Key ID 
+				"QHZvDb0Bgah3PwAhWhP93OR7RXIsl63M/4psz5Ru"); 	// Secret Access Key
+	}
 
     public static String submitImage(InputStream i) throws IOException {
         String clientRegion = "us-east-2";
@@ -26,10 +36,6 @@ public class S3Service {
         String timestamp = new Timestamp(System.currentTimeMillis()).toString();
 
         try {
-        	AWSCredentials credentials = new BasicAWSCredentials(
-    				"AKIAR2XG2A363RA436BO", 						// Access Key ID 
-    				"dzwjiFoVQIN2FY5xm9jluljmSREOA07e8gqebAk6"); 	// Secret Access Key
-        	
             AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
             		.withCredentials(new AWSStaticCredentialsProvider(credentials))
             		.withRegion(clientRegion)
@@ -41,7 +47,8 @@ public class S3Service {
             metadata.addUserMetadata("x-amz-meta-title", "HEADER");
             
             // Upload a file as a new object with ContentType and title specified.
-            PutObjectRequest request = new PutObjectRequest(bucketName, timestamp, i, metadata);
+            PutObjectRequest request = new PutObjectRequest(bucketName, timestamp, i, metadata)
+									.withCannedAcl(CannedAccessControlList.PublicRead);
             
             s3Client.putObject(request);
         }
@@ -57,7 +64,45 @@ public class S3Service {
         }
         
         String amazonPrefix = "https://s3." + clientRegion + ".amazonaws.com/" + bucketName + "/";
-        return amazonPrefix + timestamp;
+        return amazonPrefix + timestamp.replaceAll(" ", "+").replaceAll(":", "%3A");
+    }
+    
+    public static String submitImage(String filePath) throws IOException {
+        String clientRegion = "us-east-2";
+        String bucketName = "bsocial-0304-bucket";
+        String timestamp = new Timestamp(System.currentTimeMillis()).toString();
+
+        try {
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+            		.withCredentials(new AWSStaticCredentialsProvider(credentials))
+            		.withRegion(clientRegion)
+                    .build();
+        
+            
+            ObjectMetadata metadata = new ObjectMetadata();
+            metadata.setContentType("image/jpg");
+            metadata.addUserMetadata("x-amz-meta-title", "HEADER");
+            
+            // Upload a file as a new object with ContentType and title specified.
+            PutObjectRequest request = new PutObjectRequest(
+            							bucketName, timestamp, new File(filePath))
+            							.withCannedAcl(CannedAccessControlList.PublicRead);
+            
+            s3Client.putObject(request);
+        }
+        catch(AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process 
+            // it, so it returned an error response.
+            e.printStackTrace();
+        }
+        catch(SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
+        }
+        
+        String amazonPrefix = "https://s3." + clientRegion + ".amazonaws.com/" + bucketName + "/";
+        return amazonPrefix + timestamp.replaceAll(" ", "+").replaceAll(":", "%3A");
     }
    
     public static S3Object getImage(String filename) throws IOException {
@@ -65,10 +110,6 @@ public class S3Service {
        String bucketName = "bsocial-0304-bucket";
 
        try {
-    	   AWSCredentials credentials = new BasicAWSCredentials(
-   				"AKIAR2XG2A363RA436BO", 						// Access Key ID 
-   				"dzwjiFoVQIN2FY5xm9jluljmSREOA07e8gqebAk6"); 	// Secret Access Key
-       	
     	   AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
            		.withCredentials(new AWSStaticCredentialsProvider(credentials))
            		.withRegion(clientRegion)
