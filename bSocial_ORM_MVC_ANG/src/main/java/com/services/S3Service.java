@@ -27,8 +27,8 @@ public class S3Service {
 
         try {
         	AWSCredentials credentials = new BasicAWSCredentials(
-    				"AKIAR2XG2A3676MAYE63", 							// Access Key 
-    				"eZbhtllqLDg2m6jfpvZEeW8lKdEsb+nCeC12IBqf"); 		// Secret Access Key
+    				"AKIAR2XG2A363RA436BO", 						// Access Key ID 
+    				"dzwjiFoVQIN2FY5xm9jluljmSREOA07e8gqebAk6"); 	// Secret Access Key
         	
             AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
             		.withCredentials(new AWSStaticCredentialsProvider(credentials))
@@ -65,11 +65,11 @@ public class S3Service {
        String bucketName = "bsocial-0304-bucket";
 
        try {
-       	AWSCredentials credentials = new BasicAWSCredentials(
-   				"AKIAR2XG2A3676MAYE63", 							// Access Key 
-   				"eZbhtllqLDg2m6jfpvZEeW8lKdEsb+nCeC12IBqf"); 		// Secret Access Key
+    	   AWSCredentials credentials = new BasicAWSCredentials(
+   				"AKIAR2XG2A363RA436BO", 						// Access Key ID 
+   				"dzwjiFoVQIN2FY5xm9jluljmSREOA07e8gqebAk6"); 	// Secret Access Key
        	
-           AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+    	   AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
            		.withCredentials(new AWSStaticCredentialsProvider(credentials))
            		.withRegion(clientRegion)
                    .build();

@@ -1,5 +1,6 @@
 package com.controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.email.EmailHandler;
 import com.google.gson.Gson;
 import com.models.User;
+import com.services.S3Service;
 import com.services.UserService;
 
 @RestController
@@ -73,17 +75,27 @@ public class UserController
 	public User UpdateUser(@RequestBody String jsonString)
 	{
 		User user = (new Gson()).fromJson(jsonString, User.class);
-//		user.setDisplayImg("https://i.imgur.com/PL0l3PY.jpg");
-		User updatedUser = US.update(user);
-		System.out.println(updatedUser);
-		return updatedUser;
+		byte[] imageData = user.getDisplayImg().getBytes();
+		try
+		{
+			String s3Url = S3Service.submitImage(new ByteArrayInputStream(imageData));
+			user.setDisplayImg(s3Url);
+			User updatedUser = US.update(user);
+			System.out.println(updatedUser);
+			return updatedUser;
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@CrossOrigin("http://localhost:4200")
 	@RequestMapping(value = "/forgotPassword.rev", method = RequestMethod.POST)
 	public void sendPasswordEmail(@RequestParam String email)
 	{
-		String newPassword = new Integer(100000 + new Random().nextInt(90000)).toString();
+		String newPassword = new Integer(100000 + new Random().nextInt(900000)).toString();
 		User userToReset = US.selectUserByEmail(email);
 		if (userToReset != null)
 		{
