@@ -33,19 +33,12 @@ public class PostsDaoRepo {
 		
 	}
 	
-	public int insert(Posts post) {
+	public void insert(Posts post) {
 		SF.getCurrentSession().save(post);
-		return 1;
 	}
 	
-//	public int updatePost (Posts post, String username) {
-//		SF.getCurrentSession().createQuery("update Posts set username= " + username());
-//		return 0;
-//	}
-	
 	public List<Posts> getPostByUser (String username) {
-		 Query<Posts> query = SF.getCurrentSession().createNativeQuery("Select * From Posts Where username= :username")
-				 .addEntity(Posts.class)
+		 Query<Posts> query = SF.getCurrentSession().createQuery("From Posts Where username= :username", Posts.class)
 				 .setParameter("username", username);
 		List<Posts> posts = query.list();
 		return posts;
@@ -55,6 +48,21 @@ public class PostsDaoRepo {
 	public List<Posts> getAllPost () {
 		List<Posts> posts = SF.getCurrentSession().createQuery("from Posts", Posts.class).list();
 		return posts;
+	}
+	
+	public void updatePost(Posts post)
+	{
+		Query query = SF.getCurrentSession().createQuery("UPDATE Posts set Title= :newTitle, "
+													+ "image= :newImage, caption= :newCaption, "
+													+ "likes= :newLikes, dislikes= :newDislikes"
+													+ " WHERE Post_ID= :targetID")
+											.setParameter("newTitle", post.getTitle())
+											.setParameter("newImage", post.getImage())
+											.setParameter("newCaption", post.getCaption())
+											.setParameter("newLikes", post.getLikes())
+											.setParameter("newDislikes", post.getDislikes())
+											.setParameter("targetID", post.getPost_Id());
+		query.executeUpdate();
 	}
 
 }

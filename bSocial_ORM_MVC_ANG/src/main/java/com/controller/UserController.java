@@ -19,8 +19,7 @@ import com.google.gson.Gson;
 import com.models.User;
 import com.services.UserService;
 
-@Controller
-@RestController("/bSocial")
+@RestController
 public class UserController
 {
 
@@ -33,7 +32,7 @@ public class UserController
 	{
 		System.out.println(user);
 		User NewUser = new User(user.getUsername(), user.getPassword(), user.getEmail(), user.getDisplayName(),
-				"https://i.imgur.com/eCcb3Uz.jpg");
+				"https://i.imgur.com/eCcb3Uz.jpg"); 	// link to default User Profile image
 		System.out.println(NewUser);
 		US.register(NewUser);
 		return 0;
@@ -74,7 +73,7 @@ public class UserController
 	public User UpdateUser(@RequestBody String jsonString)
 	{
 		User user = (new Gson()).fromJson(jsonString, User.class);
-		user.setDisplayImg("https://i.imgur.com/PL0l3PY.jpg");
+//		user.setDisplayImg("https://i.imgur.com/PL0l3PY.jpg");
 		User updatedUser = US.update(user);
 		System.out.println(updatedUser);
 		return updatedUser;

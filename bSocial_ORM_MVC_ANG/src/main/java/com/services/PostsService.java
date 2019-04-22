@@ -23,12 +23,16 @@ public class PostsService {
 		return PDR.getPostByUser(username);
 	}
 	
-	public int insertPost(Posts post) {
+	public void insertPost(Posts post) {
 		PDR.insert(post);
-		return 0;
 	}
 	
 	public List<Posts> getAllPost(){
 		return PDR.getAllPost();
+	}
+	
+	public void updatePost(Posts post)
+	{
+		PDR.updatePost(post);
 	}
 }
