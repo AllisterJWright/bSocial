@@ -38,7 +38,7 @@ public class PostsDaoRepo {
 	}
 	
 	public List<Posts> getPostByUser (String username) {
-		 Query<Posts> query = SF.getCurrentSession().createQuery("From Posts Where username= :username", Posts.class)
+		 Query<Posts> query = SF.getCurrentSession().createQuery("FROM Posts WHERE username= :username ORDER BY Post_ID DESC", Posts.class)
 				 .setParameter("username", username);
 		List<Posts> posts = query.list();
 		return posts;
@@ -46,7 +46,7 @@ public class PostsDaoRepo {
 	
 	
 	public List<Posts> getAllPost () {
-		List<Posts> posts = SF.getCurrentSession().createQuery("from Posts", Posts.class).list();
+		List<Posts> posts = SF.getCurrentSession().createQuery("from Posts ORDER BY Post_ID DESC", Posts.class).list();
 		return posts;
 	}
 	
